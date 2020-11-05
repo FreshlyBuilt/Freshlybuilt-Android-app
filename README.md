@@ -1,2 +1,5 @@
-# FreshlyBuilt-Android-App
-You Download Freshlybuilt Android App apk here also.
+# FreshlyBuilt-Android-App 
+[branch test-apk]
+
+Guidelines for submitting Test-Apk
+
