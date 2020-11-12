@@ -2,11 +2,19 @@ package com.freshlybuilt
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import com.freshlybuilt.Fragments.Feed
+import com.freshlybuilt.Fragments.Login
+import com.freshlybuilt.R.id.baseNavFrame
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import kotlinx.android.synthetic.main.activity_base.*
+import kotlinx.android.synthetic.main.fragment_login.*
 import java.util.jar.Manifest
 
 
@@ -16,6 +24,9 @@ class Base : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
 
+
+        val fLogin = Login()
+        val fFeed = Feed()
         //runtime permission check
 
 
@@ -28,8 +39,28 @@ class Base : AppCompatActivity() {
         val mGoogleSignInClient : GoogleSignInClient = GoogleSignIn.getClient(this, gso)
         val account = GoogleSignIn.getLastSignedInAccount(this)
 
+        //default screen
+        Transaction(fLogin)
+
 
         // main fragment handler
+        main_navigation.setOnNavigationItemSelectedListener {item ->
+            when (item.itemId){
+                R.id.nav_profile ->{
+                    Transaction(fLogin)
+                    true
+                }
+                R.id.nav_feed ->{
+                    Transaction(fFeed)
+                    true
+                }
+                R.id.nav_tag->{
+                    true
+                }
+                else -> false
+            }
+
+        }
 
     }
 
@@ -60,5 +91,12 @@ class Base : AppCompatActivity() {
         val tTime : Int = Toast.LENGTH_LONG
         val toast : Toast = Toast.makeText(applicationContext,warning,tTime)
         toast.show()
+    }
+
+    private fun Transaction(fragment : Fragment){
+        val fManager = supportFragmentManager
+        val fTransaction = fManager.beginTransaction()
+        fTransaction.replace(R.id.baseFragFrame,fragment)
+        fTransaction.commit()
     }
 }
