@@ -10,7 +10,12 @@ import android.view.ViewGroup
 import com.freshlybuilt.R
 
 class Feed : Fragment(R.layout.fragment_feed) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
+
+
+    }
 
 
 }

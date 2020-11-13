@@ -9,9 +9,10 @@ import android.view.ViewGroup
 
 import com.freshlybuilt.R
 
-
-class Tags : Fragment(R.layout.fragment_tags) {
-
+/**
+ * A simple [Fragment] subclass.
+ */
+class Profile : Fragment(R.layout.fragment_profile) {
 
 
 

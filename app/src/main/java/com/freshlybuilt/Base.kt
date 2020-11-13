@@ -2,31 +2,28 @@ package com.freshlybuilt
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.freshlybuilt.Fragments.Feed
 import com.freshlybuilt.Fragments.Login
-import com.freshlybuilt.R.id.baseNavFrame
+import com.freshlybuilt.Fragments.Profile
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import kotlinx.android.synthetic.main.activity_base.*
-import kotlinx.android.synthetic.main.fragment_login.*
-import java.util.jar.Manifest
 
 
 class Base : AppCompatActivity() {
+    private val fLogin = Login()
+    private val fFeed = Feed()
+    private val fProfile = Profile()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
+        //transaction(fFeed)
 
-
-        val fLogin = Login()
-        val fFeed = Feed()
         //runtime permission check
 
 
@@ -34,24 +31,20 @@ class Base : AppCompatActivity() {
 
 
         //logging and signing check
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail().build()
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         val mGoogleSignInClient : GoogleSignInClient = GoogleSignIn.getClient(this, gso)
         val account = GoogleSignIn.getLastSignedInAccount(this)
-
-        //default screen
-        Transaction(fLogin)
 
 
         // main fragment handler
         main_navigation.setOnNavigationItemSelectedListener {item ->
             when (item.itemId){
                 R.id.nav_profile ->{
-                    Transaction(fLogin)
+                    transaction(fLogin)
                     true
                 }
                 R.id.nav_feed ->{
-                    Transaction(fFeed)
+                    transaction(fFeed)
                     true
                 }
                 R.id.nav_tag->{
@@ -64,11 +57,15 @@ class Base : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        val permission : Boolean = permissionCheck()
-        if (permission) {
 
+    override fun onStart() {
+        super.onStart()
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+        if (account == null){
+            transaction(fProfile)
+        }
+        else{
+            transaction(fLogin)
         }
     }
 
@@ -93,7 +90,7 @@ class Base : AppCompatActivity() {
         toast.show()
     }
 
-    private fun Transaction(fragment : Fragment){
+    private fun transaction(fragment : Fragment){
         val fManager = supportFragmentManager
         val fTransaction = fManager.beginTransaction()
         fTransaction.replace(R.id.baseFragFrame,fragment)
