@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFD900"
     android:backgroundTint="#99000000"
-    tools:context=".Fragments.Login">
-
+    tools:context=".Login">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -88,7 +87,7 @@
         app:layout_constraintVertical_bias="0.775" />
 
 
-    <ImageView
+    <ImageButton
         android:id="@+id/button_facebook_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

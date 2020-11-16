@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.facebook.CallbackManager
+import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -16,14 +18,13 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class Login : AppCompatActivity() {
     private val RC_SIGN_IN : Int = 0
-
-
-
     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        val callbackManager = CallbackManager.Factory.create()
+        //val LoginButton : LoginButton = findViewById(R.id.button_facebook_login)
     }
 
     override fun onStart() {
@@ -42,11 +43,7 @@ class Login : AppCompatActivity() {
         super.onResume()
         button_google_login.setOnClickListener{
             signIn()
-
-
         }
-
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -57,10 +54,7 @@ class Login : AppCompatActivity() {
         }
     }
 
-
-
     private fun signIn(){
-
         val mGoogleSignInClient : GoogleSignInClient = GoogleSignIn.getClient(this, gso)
         val signInIntent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent,RC_SIGN_IN)
