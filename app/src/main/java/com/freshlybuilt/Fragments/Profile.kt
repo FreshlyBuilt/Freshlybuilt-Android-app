@@ -1,6 +1,5 @@
 package com.freshlybuilt.Fragments
 
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,15 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class Profile : Fragment(R.layout.fragment_profile) {
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-
-
-
     }
 
     override fun onStart() {
@@ -35,8 +27,6 @@ class Profile : Fragment(R.layout.fragment_profile) {
         var profilePhoto = userAcc!!.photoUrl
         user_name.setText(profileName)
         Glide.with(this).load(profilePhoto).into(user_image)
-
-
 
         log_out.setOnClickListener(){
             signOut()
@@ -50,7 +40,9 @@ class Profile : Fragment(R.layout.fragment_profile) {
         val iLogin : Intent = Intent(activity,Login::class.java)
         mGoogleSignInClient.signOut()
         startActivity(iLogin)
+    }
 
+    private fun logOut(){
     }
 
 
