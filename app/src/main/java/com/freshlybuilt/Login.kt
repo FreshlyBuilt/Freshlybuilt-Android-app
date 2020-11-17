@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -14,17 +18,36 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.*
 
 
 class Login : AppCompatActivity() {
     private val RC_SIGN_IN : Int = 0
+
+    val callbackManager = CallbackManager.Factory.create()
+
     val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        val callbackManager = CallbackManager.Factory.create()
-        //val LoginButton : LoginButton = findViewById(R.id.button_facebook_login)
+        val button_facebook_Login : LoginButton = button_facebook_login
+
+        //button_facebook_Login.setPermissions(Arrays.asList("user_gender","user_friends"))
+        button_facebook_Login.registerCallback(callbackManager, object : FacebookCallback<LoginResult>{
+            override fun onSuccess(result: LoginResult?) {
+                inAppNotification("login successful")
+            }
+
+            override fun onCancel() {
+                inAppNotification("login Cancel")
+            }
+
+            override fun onError(error: FacebookException?) {
+                inAppNotification("oops! something went wrong")
+            }
+        })
+
     }
 
     override fun onStart() {
@@ -48,10 +71,13 @@ class Login : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode === RC_SIGN_IN) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        /*if (requestCode === RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
-        }
+        }else{
+
+        }*/
     }
 
     private fun signIn(){

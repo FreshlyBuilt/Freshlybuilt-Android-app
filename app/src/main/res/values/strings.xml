@@ -2,7 +2,7 @@
     <string name="app_name">FreshlyBuilt</string>
     <string name="nav_profile" color="#ffffff">Profile</string>
     <string name="user_name">User Name</string>
-    <string name="points">0000</string>
+    <string name="points">0</string>
     <string name="facebook_app_id">820729325135381</string>
     <string name="fb_login_protocol_scheme">fb820729325135381</string>
 </resources>
