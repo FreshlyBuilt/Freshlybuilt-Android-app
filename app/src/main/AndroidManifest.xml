@@ -20,17 +20,17 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
 
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity android:name = "com.facebook.FacebookActivity"
+            android:configChanges = "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
 
-        <activity android:name=".Login">
+        <activity android:name="com.freshlybuilt.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <activity android:name=".Base"/>
