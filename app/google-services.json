@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "508076055199",
+    "firebase_url": "https://freshlybuilt-250d6.firebaseio.com",
+    "project_id": "freshlybuilt-250d6",
+    "storage_bucket": "freshlybuilt-250d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508076055199:android:67c1bf00d9a0508019a0aa",
+        "android_client_info": {
+          "package_name": "com.freshlybuilt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508076055199-vb0hnlf4ai3rs948v0enip4q9i6t2dg8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freshlybuilt",
+            "certificate_hash": "381892535f7db8b074f246328106d74f0bb61fbb"
+          }
+        },
+        {
+          "client_id": "508076055199-7ilma27j1tk7iqguu9kfgs9mtuvuvoe6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBO9VRt3xl4LgcGQ7hZBaQHR7feL1MznWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508076055199-inkifu04fq5ui91ra4k6aauj892o5gvp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

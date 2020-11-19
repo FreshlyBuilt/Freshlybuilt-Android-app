@@ -108,7 +108,8 @@
         app:layout_constraintHorizontal_bias="0.545"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_facebook_custom"
-        app:layout_constraintVertical_bias="0.085"
-        />
+        app:layout_constraintVertical_bias="0.085" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

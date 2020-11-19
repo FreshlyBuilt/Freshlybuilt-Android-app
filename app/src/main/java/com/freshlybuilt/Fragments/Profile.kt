@@ -1,5 +1,6 @@
 package com.freshlybuilt.Fragments
 
+import android.content.AsyncQueryHandler
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -15,50 +16,63 @@ import com.freshlybuilt.Login
 import com.freshlybuilt.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_profile.*
+import java.lang.Exception
 
 class Profile : Fragment(R.layout.fragment_profile) {
 
-    private val tokenFB = AccessToken.getCurrentAccessToken()
+    private lateinit var auth : FirebaseAuth
+
+    //private val tokenFB = AccessToken.getCurrentAccessToken()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
     override fun onStart() {
         super.onStart()
-        val userAccGoogle = GoogleSignIn.getLastSignedInAccount(activity)
-        if (userAccGoogle != null){
-            var profileName = userAccGoogle!!.displayName
-            var profilePhoto = userAccGoogle!!.photoUrl
-            user_name.setText(profileName)
-            Glide.with(this).load(profilePhoto).into(user_image)
-        }
+        val user = Firebase.auth.currentUser
+        val profileName = user!!.displayName
+        val profilePhoto = user!!.photoUrl
+        user_name.setText(profileName)
+        Glide.with(this).load(profilePhoto).into(user_image)
 
         log_out.setOnClickListener(){
-            if (userAccGoogle != null){
-                signOutWithGoogle()
-            }
-            if  (tokenFB != null){
-                signOutWithFacebook()
-            }
+            logOut()
         }
     }
 
-    private fun signOutWithGoogle(){
-        val gsoCall = Login().gso
-        val mGoogleSignInClient = GoogleSignIn.getClient(activity!!, gsoCall)
-        val iLogin : Intent = Intent(activity,Login::class.java)
-        mGoogleSignInClient.signOut()
-        startActivity(iLogin)
-    }
 
-    private fun signOutWithFacebook(){
-        LoginManager.getInstance().logOut()
+
+
+
+
+
+
+
+    private fun loginIntent(){
         val iLogin : Intent = Intent(activity,Login::class.java)
         startActivity(iLogin)
     }
 
     private fun logOut(){
+        Firebase.auth.signOut()
+        try {
+            LoginManager.getInstance().logOut()
+        }catch (e : Exception){
+
+        }
+        Firebase.auth.signOut()
+        try {
+            val gsoCall = Login().gso
+            val mGoogleSignInClient = GoogleSignIn.getClient(activity!!, gsoCall)
+            mGoogleSignInClient.signOut()
+        }catch (e : Exception){
+
+        }
+        loginIntent()
     }
 
 
