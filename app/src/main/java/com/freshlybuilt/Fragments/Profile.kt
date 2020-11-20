@@ -33,6 +33,9 @@ class Profile : Fragment(R.layout.fragment_profile) {
 
     override fun onStart() {
         super.onStart()
+        val token : String = FirebaseAuth.getInstance().getAccessToken(true).toString()
+
+        val freshlyBuiltFBConnect: String = "https://freshlybuilt.com/api/user/fb_connect/?access_token=" + token
         val user = Firebase.auth.currentUser
         val profileName = user!!.displayName
         val profilePhoto = user!!.photoUrl
@@ -43,13 +46,6 @@ class Profile : Fragment(R.layout.fragment_profile) {
             logOut()
         }
     }
-
-
-
-
-
-
-
 
 
     private fun loginIntent(){
