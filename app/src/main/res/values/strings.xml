@@ -5,4 +5,5 @@
     <string name="points">0</string>
     <string name="facebook_app_id">820729325135381</string>
     <string name="fb_login_protocol_scheme">fb820729325135381</string>
+    <string name="title_activity_register">Register</string>
 </resources>
