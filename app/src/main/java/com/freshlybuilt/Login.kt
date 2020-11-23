@@ -64,6 +64,10 @@ class Login : AppCompatActivity() {
         button_facebook_custom.setOnClickListener{
             signInWithFacebook()
         }
+
+        Button_Manual_Register.setOnClickListener {
+            registerIntent()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -152,6 +156,13 @@ class Login : AppCompatActivity() {
         val iBase : Intent = Intent(this, Base::class.java)
         startActivity(iBase)
     }
+
+    private fun registerIntent(){
+        val iRegister : Intent = Intent(this, Register::class.java)
+        startActivity(iRegister)
+    }
+
+
 
     private fun inAppNotification(arg :String){
         val tTime : Int = Toast.LENGTH_LONG
