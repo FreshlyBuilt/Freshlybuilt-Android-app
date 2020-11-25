@@ -86,6 +86,7 @@
                 android:textColorHint="#000000"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Full_Name_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -152,6 +153,7 @@
                     android:textColorHint="#000000"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/user_name_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -218,6 +220,7 @@
                     android:textColorHint="#000000"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -284,6 +287,7 @@
                     android:textColorHint="#000000"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="textPassword"/>
@@ -351,6 +355,7 @@
                     android:textColorHint="#000000"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/c_password_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="textPassword"/>
