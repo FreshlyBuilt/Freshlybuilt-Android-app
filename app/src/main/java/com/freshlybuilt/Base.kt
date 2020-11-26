@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.freshlybuilt.Data.Preference
 import com.freshlybuilt.Fragments.Feed
 import com.freshlybuilt.Fragments.Profile
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -44,9 +45,14 @@ class Base : AppCompatActivity() {
                 }
                 else -> false
             }
-
         }
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!Preference(this).rememberMe()){
+            Preference(this).sessionClose()
+        }
     }
 
     private fun permissionCheck(): Boolean {
@@ -76,6 +82,8 @@ class Base : AppCompatActivity() {
         fTransaction.replace(R.id.baseFragFrame,fragment)
         fTransaction.commit()
     }
+
+
 
 
 }

@@ -15,6 +15,7 @@ class SignIn {
 
     var AUTH_RESPONSE : Boolean = false
     lateinit var JSON_COOKIE_GENERATE_RESPONSE : JSONObject
+    lateinit var JSON_USER_RETRIEVED_DATA : JSONObject
 
     val cookie_auth_address = "https://freshlybuilt.com/api/user/validate_auth_cookie/?cookie="
 
@@ -29,12 +30,15 @@ class SignIn {
                 try{
                     val userJson : JSONObject = JSONObject(response)
                     if (userJson["status"]=="ok"){
-                        this.JSON_COOKIE_GENERATE_RESPONSE = userJson
+                        JSON_COOKIE_GENERATE_RESPONSE = userJson
+                        JSON_USER_RETRIEVED_DATA = userJson.getJSONObject("user")
+
                     }
                     else{
                         Login().inAppNotification("status not OK")
                     }
                 }catch (e : JSONException) {
+                    Login().inAppNotification("json_user_retrieve_failed")
                     Login().inAppNotification(e.toString())
                 }
             }, Response.ErrorListener {})
