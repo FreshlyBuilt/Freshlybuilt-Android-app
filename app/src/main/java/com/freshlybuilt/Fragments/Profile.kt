@@ -1,48 +1,51 @@
 package com.freshlybuilt.Fragments
 
-import android.content.AsyncQueryHandler
+import android.content.Context
 import android.content.Intent
-import android.net.Uri
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Settings.Global.getString
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.facebook.AccessToken
 import com.facebook.login.LoginManager
+import com.freshlybuilt.Base
+import com.freshlybuilt.Data.Preference
 import com.freshlybuilt.Login
-
 import com.freshlybuilt.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.fragment_profile.*
-import java.lang.Exception
 
 class Profile : Fragment(R.layout.fragment_profile) {
 
     private lateinit var auth : FirebaseAuth
 
-    //private val tokenFB = AccessToken.getCurrentAccessToken()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onStart() {
         super.onStart()
-        val token : String = FirebaseAuth.getInstance().getAccessToken(true).toString()
 
-        val freshlyBuiltFBConnect: String = "https://freshlybuilt.com/api/user/fb_connect/?access_token=" + token
-        val user = Firebase.auth.currentUser
-        val profileName = user!!.displayName
-        val profilePhoto = user!!.photoUrl
-        user_name.setText(profileName)
-        Glide.with(this).load(profilePhoto).into(user_image)
+        try{val jsonParser = JsonParser()
+            val userData  = jsonParser.parse(Preference(this.activity!!).session_retrieve()).asJsonObject
+            val profileName = userData["username"].toString()
+            user_name.setText(profileName)
 
-        log_out.setOnClickListener(){
+            //val profilePhoto = user!!.photoUrl
+            //Glide.with(this).load(profilePhoto).into(user_image)
+            }catch (e: Exception){
+
+            //val pref: SharedPreferences = activity!!.getPreferences(Context.MODE_PRIVATE)
+            val id: String? = Preference(activity!!).session_retrieve()
+            TVauth.setText(id.toString())
+        }
+
+        log_out.setOnClickListener{
             logOut()
         }
     }
@@ -68,6 +71,7 @@ class Profile : Fragment(R.layout.fragment_profile) {
         }catch (e : Exception){
 
         }
+        Preference(activity!!).sessionClose()
         loginIntent()
     }
 

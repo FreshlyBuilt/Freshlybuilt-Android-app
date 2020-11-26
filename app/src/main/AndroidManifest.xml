@@ -14,10 +14,11 @@
         android:roundIcon="@mipmap/freshlybuilt_launcher_round_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ForgotPassword"></activity>
         <activity
             android:name=".Register"
             android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

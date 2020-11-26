@@ -1,51 +1,34 @@
 package com.freshlybuilt
 
-import android.R.attr
 import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.EditText
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isEmpty
-import bolts.Task.delay
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.facebook.*
-import com.facebook.appevents.AppEventsLogger
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
-import com.facebook.login.widget.LoginButton
 import com.freshlybuilt.API.SignIn
 import com.freshlybuilt.Data.Preference
-import com.freshlybuilt.Modals.User
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_register.*
-import org.json.JSONException
-import org.json.JSONObject
-import java.lang.Exception
-import java.util.*
 
 
 class Login : AppCompatActivity() {
@@ -80,6 +63,8 @@ class Login : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+
+
         button_google_login.setOnClickListener{
             signInWithGoogle()
         }
@@ -93,9 +78,14 @@ class Login : AppCompatActivity() {
         }
 
         Button_Manual_Login.setOnClickListener {
+            dismissKeyboard(this)
             progress_bar.visibility = View.VISIBLE
             UserFirebaseLogin()
             ManualLogin(user_name_login_text.text.toString(),user_password_login_text.text.toString())
+        }
+
+        forgot_password.setOnClickListener{
+            forgotIntent()
         }
     }
 
@@ -189,7 +179,10 @@ class Login : AppCompatActivity() {
         startActivity(iRegister)
     }
 
-
+    private fun forgotIntent(){
+        val iForgot : Intent = Intent(this, ForgotPassword::class.java)
+        startActivity(iForgot)
+    }
 
     fun inAppNotification(arg :String){
         val tTime : Int = Toast.LENGTH_LONG
@@ -207,10 +200,20 @@ class Login : AppCompatActivity() {
             val apiCall : StringRequest = userSignIn.CookieGenerateRequest(userName,passWord)
             requestQueue.add(apiCall)
             requestQueue.addRequestFinishedListener<StringRequest> {
-                try{preference.storeCookie(userSignIn.JSON_COOKIE_GENERATE_RESPONSE["cookie"].toString(),
-                    userSignIn.JSON_COOKIE_GENERATE_RESPONSE["cookie_admin"].toString(),
-                    userName,passWord)
-                    inAppNotification("login sucessful")
+                try{ if (remember_me.isChecked){
+                    preference.storeCookie(userSignIn.JSON_COOKIE_GENERATE_RESPONSE["cookie"].toString(),
+                        userSignIn.JSON_COOKIE_GENERATE_RESPONSE["cookie_admin"].toString(),
+                        userName,passWord,1) }
+                    else{
+                    preference.storeCookie(userSignIn.JSON_COOKIE_GENERATE_RESPONSE["cookie"].toString(),
+                        userSignIn.JSON_COOKIE_GENERATE_RESPONSE["cookie_admin"].toString(),
+                        userName,passWord,0) }
+
+                    try{preference.session_save(userSignIn.JSON_USER_RETRIEVED_DATA.toString())}
+                    catch (e : Exception){Log.d("session","session save fail")}
+
+                    Log.d("data",preference.session_retrieve().toString())
+                    inAppNotification("login successful")
                     baseIntent()
                 }catch (e :Exception){
                     inAppNotification(e.toString())
@@ -240,6 +243,12 @@ class Login : AppCompatActivity() {
                 // ...
             } */
     }
-
+    fun dismissKeyboard(activity: Activity) {
+        val imm = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if (null != activity.currentFocus) imm.hideSoftInputFromWindow(
+            activity.currentFocus!!
+                .applicationWindowToken, 0
+        )
+    }
 
 }
