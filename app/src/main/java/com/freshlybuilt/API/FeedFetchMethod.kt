@@ -9,14 +9,13 @@ import com.freshlybuilt.Login
 import org.json.JSONException
 import org.json.JSONObject
 
-object FeedFetchMethod {
+class FeedFetchMethod {
 
-     lateinit var responseFetch : JSONObject
+    lateinit var responseFetch : JSONObject
+    val API_CALL_FETCH_POST : String = "https://freshlybuilt.com/api/get_recent_posts/?page="
 
-    val API_CALL_FETCH_POST : String = "https://freshlybuilt.com/api/get_recent_posts/?page=4"
-
-    fun PostFetch() : StringRequest{
-        val requestPostFetch : StringRequest = StringRequest(Request.Method.GET, API_CALL_FETCH_POST,
+    fun PageFetch(page : Int) : StringRequest{
+        val requestPostFetch : StringRequest = StringRequest(Request.Method.GET, API_CALL_FETCH_POST+page.toString(),
             Response.Listener<String> { response ->
                 try{
                     val responseJson : JSONObject = JSONObject(response)
