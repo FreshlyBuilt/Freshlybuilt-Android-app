@@ -27,7 +27,8 @@
             android:layout_marginBottom="0dp"
             android:background="#FFCE00"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/main_navigation_bottom" />
+            app:menu="@menu/main_navigation_bottom"
+            app:elevation="10dp"/>
 
     </FrameLayout>
 

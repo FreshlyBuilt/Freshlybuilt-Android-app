@@ -215,6 +215,7 @@ class Login : AppCompatActivity() {
                     Log.d("data",preference.session_retrieve().toString())
                     inAppNotification("login successful")
                     baseIntent()
+                    finish()
                 }catch (e :Exception){
                     inAppNotification(e.toString())
                 }

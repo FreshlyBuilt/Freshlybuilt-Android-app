@@ -10,7 +10,6 @@ import org.json.JSONException
 import org.json.JSONObject
 
 class FeedFetchMethod {
-
     lateinit var responseFetch : JSONObject
     val API_CALL_FETCH_POST : String = "https://freshlybuilt.com/api/get_recent_posts/?page="
 
