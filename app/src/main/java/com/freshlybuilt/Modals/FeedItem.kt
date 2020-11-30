@@ -5,6 +5,7 @@ import org.json.JSONObject
 data class FeedItem (
 
     val image : Int = 0,
+    val imageUrl : String = "default",
     val author : String = "default",
     val date : String = "default",
     val description : String = "default",

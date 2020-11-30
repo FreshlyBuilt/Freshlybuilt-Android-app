@@ -42,11 +42,12 @@ class Profile : Fragment(R.layout.fragment_profile) {
 
             //val pref: SharedPreferences = activity!!.getPreferences(Context.MODE_PRIVATE)
             val id: String? = Preference(activity!!).session_retrieve()
-            TVauth.setText(id.toString())
+            //TVauth.setText(id.toString())
         }
 
         log_out.setOnClickListener{
             logOut()
+            activity!!.finish()
         }
     }
 
