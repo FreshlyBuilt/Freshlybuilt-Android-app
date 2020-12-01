@@ -13,6 +13,4 @@ import com.freshlybuilt.R
 class Tags : Fragment(R.layout.fragment_tags) {
 
 
-
-
 }

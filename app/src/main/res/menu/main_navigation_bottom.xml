@@ -3,14 +3,18 @@
     <item
         android:id="@+id/nav_profile"
         android:title="@string/nav_profile"
-        android:icon="@drawable/nav_profile_icon"
+        android:icon="@drawable/nav_profile_vector"
+        android:iconTint="#FFFFFF"
         />
     <item
         android:id="@+id/nav_feed"
         android:title="Feed"
-        android:icon="@drawable/nav_feed_icon"/>
+        android:icon="@drawable/nav_feed_vector"
+        android:iconTint="#FFFFFF"
+        android:checked="true"/>
     <item
         android:id="@+id/nav_tag"
         android:title="Tag"
-        android:icon="@drawable/nav_tag_icon"/>
+        android:icon="@drawable/nav_tag_vector"
+        android:iconTint="#FFFFFF"/>
 </menu>
