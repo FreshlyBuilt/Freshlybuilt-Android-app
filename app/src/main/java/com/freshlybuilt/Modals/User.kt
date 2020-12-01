@@ -3,7 +3,6 @@ package com.freshlybuilt.Modals
 object User{
 
     var LoggedInState : Int = 0
-
     var FullName : String = "default_name"
     var FirstName : String = "default_first_name"
     var LastName : String = "default_last_name"

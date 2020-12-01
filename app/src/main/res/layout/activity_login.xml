@@ -108,7 +108,7 @@
                 android:id="@+id/Button_Manual_Register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/register_button"
+                android:background="@drawable/button_register_vector"
                 android:textColor="#ffff"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,14 +120,15 @@
                 android:id="@+id/Button_Manual_Login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/login_button"
+                android:background="@drawable/button_login_svg"
+                android:elevation="10dp"
                 android:textColor="#ffff"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/Button_Manual_Register"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.973" />
+                app:layout_constraintVertical_bias="0.957" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -137,7 +138,7 @@
         android:id="@+id/button_google_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_login_google"
+        android:background="@drawable/button_login_with_google_svg"
         app:layout_constraintBottom_toTopOf="@+id/button_facebook_custom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -148,7 +149,7 @@
         android:id="@+id/button_facebook_custom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_login_with_facebook"
+        android:background="@drawable/button_login_with_facebook_svg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -19,7 +19,6 @@ class SignIn {
 
     val cookie_auth_address = "https://freshlybuilt.com/api/user/validate_auth_cookie/?cookie="
 
-
      fun CookieGenerateUrl(userName : String , userPassword : String) : String {
         return "https://freshlybuilt.com/api/user/generate_auth_cookie/?username=${userName}&password=${userPassword}"
     }
@@ -35,7 +34,7 @@ class SignIn {
 
                     }
                     else{
-                        Login().inAppNotification("status not OK")
+                        Login().inAppNotification("oops!! something went wrong")
                     }
                 }catch (e : JSONException) {
                     Login().inAppNotification("json_user_retrieve_failed")

@@ -210,14 +210,13 @@ class Login : AppCompatActivity() {
                         userName,passWord,0) }
 
                     try{preference.session_save(userSignIn.JSON_USER_RETRIEVED_DATA.toString())}
-                    catch (e : Exception){Log.d("session","session save fail")}
-
-                    Log.d("data",preference.session_retrieve().toString())
+                    catch (e : Exception){ Log.d("session","session save fail"+ e.toString())}
+                    Log.d("data",preference.session_retrieve())
                     inAppNotification("login successful")
                     baseIntent()
                     finish()
                 }catch (e :Exception){
-                    inAppNotification(e.toString())
+                    Log.d("login" , e.toString())
                 }
                 progress_bar.visibility = View.GONE
             }

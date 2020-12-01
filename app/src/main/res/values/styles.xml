@@ -24,6 +24,9 @@
     <style name="HintTextColor">
         <item name="android:textColor">#FFAB00</item>
     </style>
+    <style name="ReadMoreColor">
+        <item name="android:colorPrimary">#FFFFFF</item>
+    </style>
 
 
 
