@@ -31,6 +31,12 @@ class Preference (context : Context){
         edit.apply()
     }
 
+    fun storeCookieFB(cookie : String,remember : Int = 1){
+        edit.putString(COOKIE, cookie)
+        edit.putInt(REMEMBER_USER,remember)
+        edit.apply()
+    }
+
     fun authCookie() : String?{
         val cookie = PREFERENCE.getString(COOKIE, null)
         return cookie

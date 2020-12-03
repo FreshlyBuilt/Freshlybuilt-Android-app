@@ -24,8 +24,17 @@
     <style name="HintTextColor">
         <item name="android:textColor">#FFAB00</item>
     </style>
+
     <style name="ReadMoreColor">
         <item name="android:colorPrimary">#FFFFFF</item>
+    </style>
+
+    <style name="FullyTranslucent" parent="android:Theme.Translucent.NoTitleBar">
+        <item name="android:progressBarStyle">@style/InvisibleProgress</item>
+    </style>
+
+    <style name="InvisibleProgress">
+        <item name="android:visibility">gone</item>
     </style>
 
 

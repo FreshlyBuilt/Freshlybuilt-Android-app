@@ -39,12 +39,24 @@ class Profile : Fragment(R.layout.fragment_profile) {
         try{
             val jsonParser = JsonParser()
             val userData = JSONObject(Preference(this.activity!!).session_retrieve())
-            val profileName = "@"+userData.getString("username").toLowerCase()
-            val profileMail = userData.getString("email")
+            try{
+                val profileName = "@"+userData.getString("username").toLowerCase()
+                user_name.setText(profileName)
+            }catch (e : Exception){
+                val profileName = "@"+userData.getString("nicename").toLowerCase()
+                user_name.setText(profileName)
+            }
+            try{
+                val profileMail = userData.getString("email")
+                user_email.setText(profileMail)
+            }catch (e : Exception){
+                user_email.setText("")
+            }
+
             val userID = userData.getString("id")
             val userAvatar = Avatar+userID
-            user_name.setText(profileName)
-            user_email.setText(profileMail)
+
+
             Log.d("profilePhoto",Avatar+userID)
             Glide.with(this).load(userAvatar).into(user_image)
             }catch (e: Exception){
