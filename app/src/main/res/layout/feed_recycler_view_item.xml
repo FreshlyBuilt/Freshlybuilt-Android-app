@@ -23,7 +23,7 @@
                     android:id="@+id/post_list_image"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/default_image"/>
                 <ImageView
                     android:id="@+id/screen"
